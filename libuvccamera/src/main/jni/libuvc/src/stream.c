@@ -1799,7 +1799,13 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
 
 	int i;
 	ENTER();
+	LOGI("---uvc_stream_stop--start");
+    struct timeval start;
+    struct timeval endt;
+    unsigned long diff;
 
+	struct timeval now;
+    struct timespec outtime;
 	if (!strmh) RETURN(UVC_SUCCESS, uvc_error_t);
 
 	if (UNLIKELY(!strmh->running)) {
@@ -1835,8 +1841,34 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
 			}
 			if (i == LIBUVC_NUM_TRANSFER_BUFS)
 				break;
-			pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
+			gettimeofday(&now, NULL);
+          outtime.tv_sec = now.tv_sec+1;
+          outtime.tv_nsec =(now.tv_usec)* 1000;
+			 gettimeofday(&start, NULL);
+			 //pthread_cond_wait(&strmh->cb_cond, &strmh->cb_mutex);
+			pthread_cond_timedwait(&strmh->cb_cond, &strmh->cb_mutex, &outtime);
+			 gettimeofday(&endt, NULL);
+			  diff = (endt.tv_sec - start.tv_sec) * 1000 + (endt.tv_usec - start.tv_usec) / 1000;
+			  LOGI(" --normal--%ldms",diff);
+			  	if(diff>=1*1000-10){
+				LOGI(" --usb-disconnect--%ldms",diff);
+				break;
+				}
 		}
+		
+			for (i = 0; i < LIBUVC_NUM_TRANSFER_BUFS; i++) {
+			if (strmh->transfers[i] != NULL){
+				//delete and  set null
+				LOGI("---come in --here");
+				libusb_cancel_transfer(strmh->transfers[i]);	// XXX 20141112追加
+								UVC_DEBUG("Freeing transfer %d (%p)", i, transfer);
+								free((strmh->transfers[i])->buffer);
+								libusb_free_transfer(strmh->transfers[i]);
+								strmh->transfers[i] = NULL;
+
+				
+				}	
+			}
 		// Kick the user thread awake
 		pthread_cond_broadcast(&strmh->cb_cond);
 	}
@@ -1848,7 +1880,7 @@ uvc_error_t uvc_stream_stop(uvc_stream_handle_t *strmh) {
 		/* wait for the thread to stop (triggered by LIBUSB_TRANSFER_CANCELLED transfer) */
 		pthread_join(strmh->cb_thread, NULL);
 	}
-
+LOGI("---uvc_stream_stop--finish");
 	RETURN(UVC_SUCCESS, uvc_error_t);
 }
 
