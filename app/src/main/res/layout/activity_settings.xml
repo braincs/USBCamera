@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ddd"
+    android:focusable="true"
+    android:id="@+id/ll_settings_rootview"
+    android:focusableInTouchMode="true">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@color/colorTheme">
+
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </android.support.v7.widget.Toolbar>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll_threshold"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="58dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="#FFF"-->
+        <!--android:paddingLeft="16dp"-->
+        <!--android:paddingRight="16dp"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--android:clickable="true">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="抓拍阈值："-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="16dp"/>-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/edThreahold"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@null"-->
+            <!--android:hint="10~45"-->
+            <!--android:textAlignment="textEnd"-->
+            <!--android:inputType="numberDecimal"-->
+            <!--android:clickable="false"-->
+            <!--android:text="40"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+
+    <LinearLayout
+        android:id="@+id/ll_camera_view1"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal"
+        android:background="#FFF"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/tv_left_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="左边相机："
+            android:gravity="center_vertical|left"
+            android:textSize="16dp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_camera_view2"
+        android:layout_marginBottom="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal"
+        android:background="#FFF"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/tv_right_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="右侧相机："
+            android:gravity="center_vertical|left"
+            android:textSize="16dp"/>
+
+
+    </LinearLayout>
+</LinearLayout>
