@@ -496,7 +496,7 @@ public abstract class AbstractUVCCameraHandler extends Handler {
 			} else {
 				mUVCCamera.setPreviewTexture((SurfaceTexture)surface);
 			}
-            mUVCCamera.setFrameCallback(mIFrameCallback, UVCCamera.PIXEL_FORMAT_NV21); //UVCCamera.PIXEL_FORMAT_YUV420SP
+            mUVCCamera.setFrameCallback(mIFrameCallback, UVCCamera.PIXEL_FORMAT_YUV420SP); //UVCCamera.PIXEL_FORMAT_NV21); //UVCCamera.PIXEL_FORMAT_YUV420SP
             mUVCCamera.startPreview();
 			mUVCCamera.updateCameraParams();
 			synchronized (mSync) {
@@ -575,7 +575,7 @@ public abstract class AbstractUVCCameraHandler extends Handler {
 				muxer.prepare();
 				muxer.startRecording();
 				if (videoEncoder != null) {
-					mUVCCamera.setFrameCallback(mIFrameCallback, UVCCamera.PIXEL_FORMAT_NV21);
+					mUVCCamera.setFrameCallback(mIFrameCallback, UVCCamera.PIXEL_FORMAT_YUV420SP);
 				}
 				synchronized (mSync) {
 					mMuxer = muxer;
