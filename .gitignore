@@ -152,3 +152,4 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 .idea/
+libuvccamera/src/main/obj/local/
